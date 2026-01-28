@@ -1,19 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Task Tracker</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="container">
+    <h1>📝 Task Tracker</h1>
 
-  <div class="app-container">
-    <h1>🔥 Docker UI Test 🔥</h1>
-
-    <div class="task-input">
-      <input type="text" id="taskInput" placeholder="Enter a new task..." />
-      <button onclick="addTask()">Add Task</button>
-    </div>
+    <button onclick="loadTasks()">View Tasks</button>
 
     <ul id="taskList"></ul>
   </div>
@@ -21,4 +17,5 @@
   <script src="script.js"></script>
 </body>
 </html>
+
 
