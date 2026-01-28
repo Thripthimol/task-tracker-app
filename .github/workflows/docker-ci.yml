@@ -26,11 +26,11 @@ jobs:
       with:
         context: ./backend
         push: true
-        tags: yourdockerhub/backend:latest
+        tags: thripthimol/task-tracker-backend:latest
 
     - name: Build and push frontend
       uses: docker/build-push-action@v5
       with:
         context: ./frontend
         push: true
-        tags: yourdockerhub/frontend:latest
+        tags: thripthimol/task-tracker-frontend:latest
