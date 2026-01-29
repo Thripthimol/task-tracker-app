@@ -1,40 +1,46 @@
-const API_URL = "http://localhost:3000/tasks";
+const API = "http://localhost:3000/tasks";
 
-async function fetchTasks() {
-  const response = await fetch(API_URL);
-  const tasks = await response.json();
+async function loadTasks() {
+  const res = await fetch(API);
+  const tasks = await res.json();
 
   const list = document.getElementById("taskList");
   list.innerHTML = "";
 
-  tasks.forEach(task => {
+  tasks.forEach(t => {
     const li = document.createElement("li");
-    li.textContent = task.task;
+    li.innerHTML = `
+      <b>${t.title}</b><br>
+      Assigned: ${t.assignedTo}<br>
+      Priority: <span>${t.priority}</span>
+    `;
+    li.onclick = () => {
+      window.location.href = `task.html?id=${t.id}`;
+    };
     list.appendChild(li);
   });
 }
 
 async function addTask() {
-  const input = document.getElementById("taskInput");
-  const taskText = input.value.trim();
+  const title = document.getElementById("title").value;
+  const assignedTo = document.getElementById("assignedTo").value;
+  const priority = document.getElementById("priority").value;
 
-  if (!taskText) {
-    alert("Task cannot be empty");
+  if (!title) {
+    alert("Task title required");
     return;
   }
 
-  await fetch(API_URL, {
+  await fetch(API, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ task: taskText })
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ title, assignedTo, priority })
   });
 
-  input.value = "";
-  fetchTasks();
+  loadTasks();
 }
 
-fetchTasks();
+loadTasks();
+
 
 
