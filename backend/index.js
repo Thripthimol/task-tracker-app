@@ -34,7 +34,7 @@ app.get("/tasks", (req, res) => {
   res.json(tasks);
 });
 
-// GET task by ID (Task Details)
+// GET task by ID
 app.get("/tasks/:id", (req, res) => {
   const taskId = parseInt(req.params.id);
   const task = tasks.find(t => t.id === taskId);
@@ -63,7 +63,11 @@ app.post("/tasks", (req, res) => {
   res.status(201).json(newTask);
 });
 
-// Start server
-app.listen(3000, () => {
-  console.log("Backend running on port 3000");
-});
+// ✅ start server only when run directly
+if (require.main === module) {
+  app.listen(3000, () => {
+    console.log("Backend running on port 3000");
+  });
+}
+
+module.exports = app;
